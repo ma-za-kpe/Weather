@@ -1,7 +1,6 @@
 package com.maku.weather.data.network.interfaces.service
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.maku.weather.R
 import com.maku.weather.data.db.entity.WeatherResponse
 import com.maku.weather.data.network.interfaces.connection.ConnectivityInterceptor
 import kotlinx.coroutines.Deferred
@@ -12,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-const val API_KEY = R.string.key
+const val API_KEY = "c5b2f8bd18a93029fde1ce0bfd88fed3"
 // base url : http://api.openweathermap.org/data/2.5/weather?q=arua&appid=c5b2f8bd18a93029fde1ce0bfd88fed3
 
 
