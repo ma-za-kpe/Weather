@@ -3,7 +3,7 @@ package com.maku.weather.data.db.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class TodayWeather(
+data class WeatherResponse(
     val base: String,
     val clouds: Clouds,
     val cod: Int,

@@ -1,6 +1,7 @@
 package com.maku.weather.data.network.interfaces.service
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.maku.weather.data.db.entity.WeatherResponse
 import com.maku.weather.data.network.interfaces.connection.ConnectivityInterceptor
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -16,14 +17,14 @@ const val API_KEY = "c5b2f8bd18a93029fde1ce0bfd88fed3"
 
 interface WeatherService {
 
-    @GET("weather")
+    @GET("data/2.5/weather")
     fun getCurrentWeather(
         @Query("q") location:String
-    ) : Deferred<String>
+    ) : Deferred<WeatherResponse>
 
     companion object{
         operator fun invoke(
-            connectivityInterceptor: ConnectivityInterceptor
+//            connectivityInterceptor: ConnectivityInterceptor
         ): WeatherService {
             val requestInterceptor = Interceptor { chain ->
 
@@ -42,12 +43,12 @@ interface WeatherService {
 
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
-                .addInterceptor(connectivityInterceptor)
+//                .addInterceptor(connectivityInterceptor)
                 .build()
 
             return Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("http://api.openweathermap.org/data/2.5/")
+                .baseUrl("https://api.openweathermap.org/")
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
