@@ -3,11 +3,15 @@ package com.maku.weather.ui.fragment.today
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.maku.weather.data.repository.ForecastRepository
+import com.maku.weather.internal.lazyDeferred
 
-class TodayViewModel : ViewModel() {
+//
+class TodayViewModel(private val foreCastRepository: ForecastRepository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    //called only when needed - lazily
+    val weather by lazyDeferred {
+        foreCastRepository.getCurrentWeather()
     }
-    val text: LiveData<String> = _text
+
 }

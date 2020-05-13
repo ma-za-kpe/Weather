@@ -14,6 +14,7 @@ import com.maku.weather.data.network.interfaces.datasource.WeatherNetworkDataSou
 import com.maku.weather.data.network.interfaces.service.WeatherService
 import com.maku.weather.data.repository.ForecastRepository
 import com.maku.weather.data.repository.ForecastRepositoryImpl
+import com.maku.weather.ui.fragment.today.TodayViewModelFactory
 import com.maku.weather.utils.isNight
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -57,7 +58,7 @@ class Weather : Application(), KodeinAware {
 //        bind() from provider { LocationServices.getFusedLocationProviderClient(instance<Context>()) }
 //        bind<LocationProvoder>() with singleton { LocationProvoderImpl(instance(), instance()) }
         bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance()) }
-//        bind() from provider { TodayViewModelFactory(instance()) }
+        bind() from provider { TodayViewModelFactory(instance()) }
 //        bind() from provider { FutureListWeatherViewModelFactory(instance(), instance()) }
 //        bind() from factory { detailDate: LocalDate -> FutureDetailWeatherViewModelFactory(detailDate, instance(), instance()) }
 

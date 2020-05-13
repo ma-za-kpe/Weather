@@ -18,8 +18,13 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.maku.weather.R
 import com.shreyaspatil.MaterialDialog.MaterialDialog
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.closestKodein
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), KodeinAware {
+
+    //kodein
+    override val kodein by closestKodein()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 

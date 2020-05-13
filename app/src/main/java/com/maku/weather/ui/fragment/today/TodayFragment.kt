@@ -4,30 +4,36 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.maku.weather.R
-import com.maku.weather.data.network.interfaces.service.WeatherService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import com.maku.weather.databinding.FragmentTodayBinding
+import com.maku.weather.ui.base.ScopedFragment
 import kotlinx.coroutines.launch
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 import timber.log.Timber
 
-class TodayFragment : Fragment() {
+class TodayFragment : ScopedFragment(), KodeinAware {
 
+    override val kodein by closestKodein()
+
+    private val viewModelFactory: TodayViewModelFactory by instance<TodayViewModelFactory>()
     private lateinit var homeViewModel: TodayViewModel
+    private lateinit var todayBinding: FragmentTodayBinding
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-                ViewModelProviders.of(this).get(TodayViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
+        //presavation of viewmodels is a job of the viewmodelprovider
+        homeViewModel = ViewModelProvider(this, viewModelFactory).get(TodayViewModel::class.java)
+
+        // Inflate the layout for this fragment
+        todayBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_today, container, false)
 
 //        val service = WeatherService()
 //
@@ -36,7 +42,17 @@ class TodayFragment : Fragment() {
 //            textView.text = current.toString()
 //            Timber.d("respose " + current)
 //        }
+        bindUI()
+        return todayBinding.root
+    }
 
-        return root
+    private fun bindUI()  = launch {
+        Timber.d("on bindUI")
+
+        val todayWeather = homeViewModel.weather.await()
+        todayWeather.observe(viewLifecycleOwner, Observer {
+            if (it == null) return@Observer //return from observer beace the db could be empty
+            todayBinding.textHome.text = it.toString()
+        })
     }
 }
