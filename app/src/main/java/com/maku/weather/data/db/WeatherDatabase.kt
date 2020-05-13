@@ -24,7 +24,7 @@ abstract class WeatherDatabase: RoomDatabase() {
 
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(context.applicationContext,
-                WeatherDatabase::class.java, "forecast.db")
+                WeatherDatabase::class.java, "weather.db")
                 .fallbackToDestructiveMigration()
                 .build()
     }

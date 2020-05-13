@@ -29,13 +29,13 @@ class TodayFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
 
-        val service = WeatherService()
-
-        GlobalScope.launch(Dispatchers.Main) {
-            val current = service.getCurrentWeather("arua").await()
-            textView.text = current.toString()
-            Timber.d("respose " + current)
-        }
+//        val service = WeatherService()
+//
+//        GlobalScope.launch(Dispatchers.Main) {
+//            val current = service.getCurrentWeather("arua").await()
+//            textView.text = current.toString()
+//            Timber.d("respose " + current)
+//        }
 
         return root
     }

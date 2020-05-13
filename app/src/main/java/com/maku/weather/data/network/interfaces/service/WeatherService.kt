@@ -1,6 +1,7 @@
 package com.maku.weather.data.network.interfaces.service
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.maku.weather.data.network.interfaces.connection.ConnectivityInterceptor
 import com.maku.weather.data.network.response.WeatherResponse
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -23,7 +24,7 @@ interface WeatherService {
 
     companion object{
         operator fun invoke(
-//            connectivityInterceptor: ConnectivityInterceptor
+            connectivityInterceptor: ConnectivityInterceptor
         ): WeatherService {
             val requestInterceptor = Interceptor { chain ->
 
@@ -42,7 +43,7 @@ interface WeatherService {
 
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
-//                .addInterceptor(connectivityInterceptor)
+                .addInterceptor(connectivityInterceptor)
                 .build()
 
             return Retrofit.Builder()
