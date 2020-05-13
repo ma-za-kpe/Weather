@@ -1,7 +1,7 @@
-package com.maku.weather.data.db.entity
+package com.maku.weather.data.network.response
 
 
-import com.google.gson.annotations.SerializedName
+import com.maku.weather.data.db.entity.*
 
 data class WeatherResponse(
     val base: String,

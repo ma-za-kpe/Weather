@@ -1,7 +1,7 @@
 package com.maku.weather.data.network.interfaces.datasource
 
 import androidx.lifecycle.LiveData
-import com.maku.weather.data.db.entity.WeatherResponse
+import com.maku.weather.data.network.response.WeatherResponse
 
 interface WeatherNetworkDataSource {
     val downloadedCurrentWeather: LiveData<WeatherResponse> // Live data data type, which can be observed for change in the repository class.

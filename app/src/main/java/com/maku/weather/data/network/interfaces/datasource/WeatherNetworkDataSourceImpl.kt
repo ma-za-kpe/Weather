@@ -2,7 +2,7 @@ package com.maku.weather.data.network.interfaces.datasource
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.maku.weather.data.db.entity.WeatherResponse
+import com.maku.weather.data.network.response.WeatherResponse
 import com.maku.weather.data.network.interfaces.service.WeatherService
 import com.maku.weather.internal.NoConnectivityException
 import timber.log.Timber

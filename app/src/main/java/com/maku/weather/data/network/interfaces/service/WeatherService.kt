@@ -1,8 +1,7 @@
 package com.maku.weather.data.network.interfaces.service
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.maku.weather.data.db.entity.WeatherResponse
-import com.maku.weather.data.network.interfaces.connection.ConnectivityInterceptor
+import com.maku.weather.data.network.response.WeatherResponse
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
