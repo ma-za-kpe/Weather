@@ -52,7 +52,16 @@ class TodayFragment : ScopedFragment(), KodeinAware {
         val todayWeather = homeViewModel.weather.await()
         todayWeather.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer //return from observer beace the db could be empty
+            Timber.d("weather today %s", it.toString())
             todayBinding.textHome.text = it.toString()
         })
+
+        val weatherDetails = homeViewModel.weatherdetails.await()
+        weatherDetails.observe(viewLifecycleOwner, Observer {
+            if (it == null) return@Observer //return from observer beace the db could be empty
+            Timber.d("weather details %s", it.toString())
+            todayBinding.home.text = it.description
+        })
+
     }
 }

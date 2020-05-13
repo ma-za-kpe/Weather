@@ -6,16 +6,14 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.maku.weather.data.db.entity.Main
-import com.maku.weather.data.db.entity.TODAY_WEATHER_ID
 import com.maku.weather.data.db.entity.WEATHER_ID
 import com.maku.weather.data.db.entity.Weather
 
 @Dao
-interface TodayWeatherDao {
+interface WeatherDetailsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun upsert(mainEntry: Main) //update or insert at the same time
+    fun upsert(mainEntry: List<Weather>) //update or insert at the same time
 
-    @Query("select * from today_weather where id = $TODAY_WEATHER_ID")
-    fun getCurrentWeather(): LiveData<Main>
-
+    @Query("select * from weather_details where id = $WEATHER_ID")
+    fun getWeatherDetails(): LiveData<Weather>
 }
