@@ -49,6 +49,7 @@ class TodayFragment : ScopedFragment(), KodeinAware {
     private fun bindUI()  = launch {
         Timber.d("on bindUI")
 
+        //weather
         val todayWeather = homeViewModel.weather.await()
         todayWeather.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer //return from observer beace the db could be empty
@@ -56,6 +57,7 @@ class TodayFragment : ScopedFragment(), KodeinAware {
             todayBinding.textHome.text = it.toString()
         })
 
+        //weather details
         val weatherDetails = homeViewModel.weatherdetails.await()
         weatherDetails.observe(viewLifecycleOwner, Observer {weather ->
             if (weather == null) return@Observer //return from observer beace the db could be empty
@@ -63,5 +65,12 @@ class TodayFragment : ScopedFragment(), KodeinAware {
             todayBinding.home.text = weather.toString()
         })
 
+        //weather country
+        val weatherCountry = homeViewModel.weatherCountry.await()
+        weatherCountry.observe(viewLifecycleOwner, Observer {country ->
+            if (country == null) return@Observer //return from observer beace the db could be empty
+            Timber.d("weather details %s", country)
+            todayBinding.cou.text = country.toString()
+        })
     }
 }

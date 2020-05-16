@@ -4,18 +4,21 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.maku.weather.data.db.dao.CountryWeatherDao
 import com.maku.weather.data.db.dao.TodayWeatherDao
 import com.maku.weather.data.db.dao.WeatherDetailsDao
 import com.maku.weather.data.db.entity.Main
+import com.maku.weather.data.db.entity.Sys
 import com.maku.weather.data.db.entity.Weather
 
 @Database(
-    entities = [Main::class, Weather::class],
-    version = 3
+    entities = [Main::class, Weather::class, Sys::class],
+    version = 4
 )
 abstract class WeatherDatabase: RoomDatabase() {
     abstract fun todaywetherdao(): TodayWeatherDao
     abstract fun wetherdetailsdao(): WeatherDetailsDao
+    abstract fun wethercountrydao(): CountryWeatherDao
 
     companion object {
         @Volatile private var instance: WeatherDatabase? = null //all threads will have immediate access to this property - volatile

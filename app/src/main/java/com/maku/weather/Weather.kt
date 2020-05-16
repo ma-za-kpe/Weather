@@ -51,6 +51,7 @@ class Weather : Application(), KodeinAware {
         bind() from singleton { WeatherDatabase(instance()) }
         bind() from singleton { instance<WeatherDatabase>().todaywetherdao()}
         bind() from singleton { instance<WeatherDatabase>().wetherdetailsdao()}
+        bind() from singleton { instance<WeatherDatabase>().wethercountrydao()}
 //        bind() from singleton { instance<ForecastDatabase>().futureWeatherDao() }
 //        bind() from singleton { instance<ForecastDatabase>().weatherLocationDao() }
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
@@ -58,7 +59,7 @@ class Weather : Application(), KodeinAware {
         bind<WeatherNetworkDataSource>() with singleton { WeatherNetworkDataSourceImpl(instance()) }
 //        bind() from provider { LocationServices.getFusedLocationProviderClient(instance<Context>()) }
 //        bind<LocationProvoder>() with singleton { LocationProvoderImpl(instance(), instance()) }
-        bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance(), instance()) }
+        bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance(), instance(), instance()) }
         bind() from provider { TodayViewModelFactory(instance()) }
 //        bind() from provider { FutureListWeatherViewModelFactory(instance(), instance()) }
 //        bind() from factory { detailDate: LocalDate -> FutureDetailWeatherViewModelFactory(detailDate, instance(), instance()) }

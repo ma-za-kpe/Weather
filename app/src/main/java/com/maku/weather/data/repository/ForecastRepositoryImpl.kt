@@ -1,9 +1,11 @@
 package com.maku.weather.data.repository
 
 import androidx.lifecycle.LiveData
+import com.maku.weather.data.db.dao.CountryWeatherDao
 import com.maku.weather.data.db.dao.TodayWeatherDao
 import com.maku.weather.data.db.dao.WeatherDetailsDao
 import com.maku.weather.data.db.entity.Main
+import com.maku.weather.data.db.entity.Sys
 import com.maku.weather.data.db.entity.Weather
 import com.maku.weather.data.network.interfaces.datasource.WeatherNetworkDataSource
 import com.maku.weather.data.network.response.WeatherResponse
@@ -17,7 +19,8 @@ import timber.log.Timber
 class ForecastRepositoryImpl(
     private val weatherNetworkDataSource: WeatherNetworkDataSource,
     private val todayWeatherDao: TodayWeatherDao,
-    private val weatherDetailsDao: WeatherDetailsDao
+    private val weatherDetailsDao: WeatherDetailsDao,
+    private val countryWeatherDao: CountryWeatherDao
 ) : ForecastRepository {
 
     init {
@@ -33,8 +36,7 @@ class ForecastRepositoryImpl(
         GlobalScope.launch(Dispatchers.IO) {
             todayWeatherDao.upsert(newcurrentweather.main)
             weatherDetailsDao.upsert(newcurrentweather.weather)
-            Timber.d("detail ... " + newcurrentweather.weather[0])
-            Timber.d("detail xxx " + newcurrentweather.weather)
+            countryWeatherDao.upsert(newcurrentweather.sys)
         }
     }
 
@@ -54,6 +56,16 @@ class ForecastRepositoryImpl(
         //withcontext returns something
         return withContext(Dispatchers.IO) {
             return@withContext weatherDetailsDao.getWeatherDets()
+        }
+    }
+
+    override suspend fun getCountryDetails(): LiveData<Sys> {
+        initWeatherData()
+        val details  = weatherDetailsDao.getWeatherDetails()
+        Timber.d("details ...." + details)
+        //withcontext returns something
+        return withContext(Dispatchers.IO) {
+            return@withContext countryWeatherDao.getCountryWeather()
         }
     }
 
