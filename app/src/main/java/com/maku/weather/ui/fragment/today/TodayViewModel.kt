@@ -14,7 +14,6 @@ class TodayViewModel(private val foreCastRepository: ForecastRepository) : ViewM
         foreCastRepository.getCurrentWeather()
     }
 
-
     val weatherdetails by lazyDeferred {
         foreCastRepository.getWeatherDetails()
     }

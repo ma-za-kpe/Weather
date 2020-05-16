@@ -57,10 +57,10 @@ class TodayFragment : ScopedFragment(), KodeinAware {
         })
 
         val weatherDetails = homeViewModel.weatherdetails.await()
-        weatherDetails.observe(viewLifecycleOwner, Observer {
-            if (it == null) return@Observer //return from observer beace the db could be empty
-            Timber.d("weather details %s", it.toString())
-            todayBinding.home.text = it.description
+        weatherDetails.observe(viewLifecycleOwner, Observer {weather ->
+            if (weather == null) return@Observer //return from observer beace the db could be empty
+            Timber.d("weather details %s", weather)
+            todayBinding.home.text = weather.toString()
         })
 
     }

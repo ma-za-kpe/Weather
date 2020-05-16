@@ -33,6 +33,8 @@ class ForecastRepositoryImpl(
         GlobalScope.launch(Dispatchers.IO) {
             todayWeatherDao.upsert(newcurrentweather.main)
             weatherDetailsDao.upsert(newcurrentweather.weather)
+            Timber.d("detail ... " + newcurrentweather.weather[0])
+            Timber.d("detail xxx " + newcurrentweather.weather)
         }
     }
 
@@ -47,21 +49,16 @@ class ForecastRepositoryImpl(
 
     override suspend fun getWeatherDetails(): LiveData<Weather> {
         initWeatherData()
+        val details  = weatherDetailsDao.getWeatherDetails()
+        Timber.d("details ...." + details)
         //withcontext returns something
         return withContext(Dispatchers.IO) {
-            return@withContext weatherDetailsDao.getWeatherDetails()
+            return@withContext weatherDetailsDao.getWeatherDets()
         }
     }
 
     // network call which will initiate the first cashing of data inside the database
     private suspend fun initWeatherData() {
-        val lastWeatherLocation = weatherDetailsDao.getWeatherDetails().value
-
-        if (lastWeatherLocation == null) {
-            fetchCurrentWeather()
-            return
-        }
-
         if (isFetchCurrentNeeded(ZonedDateTime.now().minusHours(1)))
             fetchCurrentWeather()
     }

@@ -11,7 +11,7 @@ import com.maku.weather.data.db.entity.Weather
 
 @Database(
     entities = [Main::class, Weather::class],
-    version = 2
+    version = 3
 )
 abstract class WeatherDatabase: RoomDatabase() {
     abstract fun todaywetherdao(): TodayWeatherDao
@@ -27,7 +27,7 @@ abstract class WeatherDatabase: RoomDatabase() {
 
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(context.applicationContext,
-                WeatherDatabase::class.java, "weather.db")
+                WeatherDatabase::class.java, "DB.db")
                 .fallbackToDestructiveMigration()
                 .build()
     }
