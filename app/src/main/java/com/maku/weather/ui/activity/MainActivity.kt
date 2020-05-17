@@ -20,6 +20,7 @@ import com.maku.weather.R
 import com.shreyaspatil.MaterialDialog.MaterialDialog
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity(), KodeinAware {
 
@@ -65,6 +66,11 @@ class MainActivity : AppCompatActivity(), KodeinAware {
 
                 // Call for help change UI Mode
                 AppCompatDelegate.setDefaultNightMode(mode)
+                true
+            }
+
+            R.id.settings_theme -> {
+               Timber.d("Settings... ")
                 true
             }
 

@@ -8,12 +8,12 @@
     <color name="statusBarColor">#FFFFFF</color>
 
     <color name="textColor">@android:color/black</color>
-    <color name="bulbColor">#A10097</color>
-    <color name="post_background">@android:color/white</color>
+    <color name="bulbColor">@android:color/black</color>
 
+    <color name="post_background">@android:color/white</color>
     <color name="imageBackgroundTint">#C3C3C3</color>
+    <color name="icons_pink">#0022FF</color>
 
     <color name="colorStatusConnected">#43A047</color>
     <color name="colorStatusNotConnected">#D32F2F</color>
-    <color name="icons_pink">#0022FF</color>
 </resources>

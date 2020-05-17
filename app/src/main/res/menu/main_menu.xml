@@ -7,4 +7,10 @@
         android:title="Theme"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/settings_theme"
+        android:icon="@drawable/ic_settings"
+        android:title="Theme"
+        app:showAsAction="always" />
+
 </menu>
