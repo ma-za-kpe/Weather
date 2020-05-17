@@ -41,7 +41,12 @@ class Weather : Application(), KodeinAware {
             AppCompatDelegate.MODE_NIGHT_NO
         }
 
+        //day and night
         AppCompatDelegate.setDefaultNightMode(mode)
+
+        //settings
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
+
     }
 
     //Using Kodein.lazy allows you to access the Context at binding time.

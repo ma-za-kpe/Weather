@@ -15,6 +15,11 @@
         android:id="@+id/navigation_future"
         android:name="com.maku.weather.ui.fragment.future.FutureFragment"
         android:label="@string/title_sevendays"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_future" />
+
+
+    <!--Global action-->
+    <action android:id="@+id/open_settings_fragment"
+        app:destination="@id/settings_theme"/>
 
 </navigation>
