@@ -1,5 +1,5 @@
 # Weather
-![](weather/media.png)
+![](media/weather.png)
 
 ## About
 A simple weather app demonstrating the MVVM kotlin, Android Jetpack components and kodein, to fetch data from the server and display in the app using the retrofit library.
