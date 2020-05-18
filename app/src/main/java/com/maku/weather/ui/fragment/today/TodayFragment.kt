@@ -54,7 +54,7 @@ class TodayFragment : ScopedFragment(), KodeinAware {
         todayWeather.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer //return from observer beace the db could be empty
             Timber.d("weather today %s", it.toString())
-            todayBinding.textHome.text = it.toString()
+//            todayBinding.textHome.text = it.toString()
         })
 
         //weather details
@@ -62,7 +62,7 @@ class TodayFragment : ScopedFragment(), KodeinAware {
         weatherDetails.observe(viewLifecycleOwner, Observer {weather ->
             if (weather == null) return@Observer //return from observer beace the db could be empty
             Timber.d("weather details %s", weather)
-            todayBinding.home.text = weather.toString()
+//            todayBinding.home.text = weather.toString()
         })
 
         //weather country
@@ -70,7 +70,7 @@ class TodayFragment : ScopedFragment(), KodeinAware {
         weatherCountry.observe(viewLifecycleOwner, Observer {country ->
             if (country == null) return@Observer //return from observer beace the db could be empty
             Timber.d("weather details %s", country)
-            todayBinding.cou.text = country.toString()
+//            todayBinding.cou.text = country.toString()
         })
     }
 }
